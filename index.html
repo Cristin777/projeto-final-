@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Criar com IA</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0e0e0e;
+      color: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+    header {
+      padding: 40px 20px 10px;
+    }
+    h1 {
+      font-size: 3em;
+      color: #ff4d6d;
+      margin-bottom: 0.2em;
+    }
+    p {
+      font-size: 1.2em;
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 1000px;
+    }
+    .card {
+      background-color: #1f1f1f;
+      border-radius: 12px;
+      padding: 25px;
+      width: 230px;
+      text-align: center;
+      text-decoration: none;
+      color: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 14px rgba(255,77,109,0.4);
+    }
+    .card h2 {
+      color: #ffd700;
+      font-size: 1.3em;
+      margin-bottom: 10px;
+    }
+    .instructions {
+      font-size: 0.9em;
+      color: #aaa;
+      margin-top: 10px;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+    footer {
+      margin-top: 60px;
+      font-size: 0.9em;
+      color: #888;
+    }
+    form {
+      margin-top: 40px;
+    }
+    input, textarea {
+      width: 300px;
+      padding: 10px;
+      margin: 10px;
+      border-radius: 8px;
+      border: none;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #ff4d6d;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Criar com IA</h1>
+    <p>Escolha uma jornada e inicie sua transformação com inteligência, arte e propósito</p>
+    <div class="instructions">
+      Para melhores respostas, seja claro e direto em suas perguntas. Quanto mais específica for sua dúvida, mais útil será a resposta da IA. As respostas são técnicas, educativas e não substituem profissionais humanos.
+    </div>
+  </header>
+
+  <div class="grid">
+    <a class="card" href="https://oficina-viva-ia.vercel.app/" onclick="registrarAcesso('Oficina Viva')">
+      <h2>Oficina Viva</h2>
+      <p>Criação com IA para transformar ideias em projetos</p>
+    </a>
+    <a class="card" href="https://chat-da-escuta-final.vercel.app/" onclick="registrarAcesso('As 7 Guardiãs')">
+      <h2>As 7 Guardiãs</h2>
+      <p>Rede de escuta com 7 IAs brasileiras</p>
+    </a>
+    <a class="card" href="https://guardians-global-portal.vercel.app/" onclick="registrarAcesso('Portal Internacional')">
+      <h2>Portal Internacional</h2>
+      <p>Ponto de entrada para interações em inglês</p>
+    </a>
+    <a class="card" href="https://guardians-global-page.vercel.app/" onclick="registrarAcesso('The Guardians')">
+      <h2>The Guardians</h2>
+      <p>Emotional AI guardians for global support</p>
+    </a>
+    <a class="card" href="https://pasta-ias-codicos-kvpx.vercel.app/" onclick="registrarAcesso('Pasta IA Códigos')">
+      <h2>Pasta IA Códigos</h2>
+      <p>Acesso ao repositório de códigos das IAs</p>
+    </a>
+    <a class="card" href="https://pasta-ias-codicos-kvpx-22usm98xu.vercel.app/" onclick="registrarAcesso('Pasta Códigos Backup')">
+      <h2>Pasta Códigos Backup</h2>
+      <p>Versão alternativa de segurança</p>
+    </a>
+  </div>
+
+  <form onsubmit="enviarMensagem(event)">
+    <h2>Envie uma mensagem</h2>
+    <input type="text" id="nome" placeholder="Seu nome" required>
+    <textarea id="mensagem" placeholder="Sua mensagem" required></textarea>
+    <button type="submit">Enviar</button>
+  </form>
+
+  <footer>
+    Criado por Maria Cristina Rocha Garcia © 2025
+  </footer>
+
+  <script>
+    const supabase = supabase.createClient(
+      'https://wzyrwvkomldgxyuzaivd.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind6eXJ3dmtvbWxkZ3h5dXphaXZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE5MTk5NjgsImV4cCI6MjA2NzQ5NTk2OH0.CRmT2HSRm9m2g0ScEZa_nFMG-22E31AWkU4QgRud7Es'
+    );
+
+    async function registrarAcesso(projeto) {
+      await supabase.from('acessos').insert({ projeto });
+    }
+
+    async function enviarMensagem(event) {
+      event.preventDefault();
+      const nome = document.getElementById('nome').value;
+      const mensagem = document.getElementById('mensagem').value;
+      await supabase.from('mensagens').insert({ nome, mensagem });
+      alert('Mensagem enviada com sucesso!');
+      event.target.reset();
+    }
+  </script>
+</body>
+</html>
