@@ -71,24 +71,6 @@
       font-size: 0.9em;
       color: #888;
     }
-    form {
-      margin-top: 40px;
-    }
-    input, textarea {
-      width: 300px;
-      padding: 10px;
-      margin: 10px;
-      border-radius: 8px;
-      border: none;
-    }
-    button {
-      padding: 10px 20px;
-      background-color: #ff4d6d;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
   </style>
 </head>
 <body>
@@ -117,22 +99,15 @@
       <h2>The Guardians</h2>
       <p>Emotional AI guardians for global support</p>
     </a>
-    <a class="card" href="https://pasta-ias-codicos-kvpx.vercel.app/" onclick="registrarAcesso('Pasta IA Códigos')">
-      <h2>Pasta IA Códigos</h2>
-      <p>Acesso ao repositório de códigos das IAs</p>
+    <a class="card" href="https://anima-renascens2.vercel.app/" onclick="registrarAcesso('Anima Renascens')">
+      <h2>Anima Renascens</h2>
+      <p>Renascimento da mulher após os 40</p>
     </a>
-    <a class="card" href="https://pasta-ias-codicos-kvpx-22usm98xu.vercel.app/" onclick="registrarAcesso('Pasta Códigos Backup')">
-      <h2>Pasta Códigos Backup</h2>
-      <p>Versão alternativa de segurança</p>
+    <a class="card" href="https://entrada-seven.vercel.app/" onclick="registrarAcesso('Te Escuto – Além Fronteiras')">
+      <h2>Te Escuto – Além Fronteiras</h2>
+      <p>Escuta terapêutica e conexão emocional</p>
     </a>
   </div>
-
-  <form onsubmit="enviarMensagem(event)">
-    <h2>Envie uma mensagem</h2>
-    <input type="text" id="nome" placeholder="Seu nome" required>
-    <textarea id="mensagem" placeholder="Sua mensagem" required></textarea>
-    <button type="submit">Enviar</button>
-  </form>
 
   <footer>
     Criado por Maria Cristina Rocha Garcia © 2025
@@ -146,15 +121,6 @@
 
     async function registrarAcesso(projeto) {
       await supabase.from('acessos').insert({ projeto });
-    }
-
-    async function enviarMensagem(event) {
-      event.preventDefault();
-      const nome = document.getElementById('nome').value;
-      const mensagem = document.getElementById('mensagem').value;
-      await supabase.from('mensagens').insert({ nome, mensagem });
-      alert('Mensagem enviada com sucesso!');
-      event.target.reset();
     }
   </script>
 </body>
